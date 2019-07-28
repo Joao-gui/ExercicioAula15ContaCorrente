@@ -44,7 +44,7 @@ public class ContaCorrente {
 	}
 	
 	public void sacar(Double valor) {
-		Verificadora.valorMaiorQueZeroSaldoDisponivel(valor, "Valor de saque tem que ser maior que zero, e possuir saldo disponivel para saque.");
+		Verificadora.valorMaiorQueZeroSaldoDisponivel(valor, "Valor de saque tem que ser maior que zero, e possuir saldo disponivel para saque.", this.saldo);
 		
 		this.saldo -= valor;
 		this.historico.add("Valor retirado: R$ -" + valor);

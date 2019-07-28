@@ -1,6 +1,5 @@
 package com.db1.contacorrente.infra;
 
-import com.db1.contacorrente.ContaCorrente;
 
 public class Verificadora {
 	
@@ -16,9 +15,8 @@ public class Verificadora {
 		}
 	}
 	
-	public static void valorMaiorQueZeroSaldoDisponivel(Double value, String menssage) {
-		ContaCorrente contaCorrente = new ContaCorrente("00465", "00001234", "Maiko Cunha");
-		if (value == null || value <= 0 || contaCorrente.getSaldo() < value) {
+	public static void valorMaiorQueZeroSaldoDisponivel(Double value, String menssage, Double saldo) {
+		if (value == null || value <= 0 || saldo < value) {
 			throw new RuntimeException(menssage);
 		}
 	}

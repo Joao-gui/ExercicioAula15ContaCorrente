@@ -79,7 +79,7 @@ public class VerificadoraTest {
 	public void deveRetornarExceptionQuandoValorDoSaqueForMaiorQueSaldo() {
 		String menssage = null;		
 		try {
-			Verificadora.valorMaiorQueZeroSaldoDisponivel(100.0, "Saldo insuficiente.");
+			Verificadora.valorMaiorQueZeroSaldoDisponivel(100.0, "Saldo insuficiente.", 0.0 );
 		}catch(RuntimeException e) {
 			menssage = e.getMessage();
 		}
@@ -90,7 +90,7 @@ public class VerificadoraTest {
 	public void deveRetornarExceptionQunadoValorDoSaqueForNull() {
 		String menssage = null;
 		try {
-			Verificadora.valorMaiorQueZeroSaldoDisponivel(null, "Valor de saque deve ser maior que zero.");
+			Verificadora.valorMaiorQueZeroSaldoDisponivel(null, "Valor de saque deve ser maior que zero.", 0.0);
 		}catch (RuntimeException e) {
 			menssage = e.getMessage();
 		}
@@ -101,7 +101,7 @@ public class VerificadoraTest {
 	public void deveRetornarExceptionQunadoSaqueForMenorQueZero() {
 		String menssage = null;
 		try {
-			Verificadora.valorMaiorQueZeroSaldoDisponivel(-0.1, "Valor de saque deve ser maior que zero.");
+			Verificadora.valorMaiorQueZeroSaldoDisponivel(-1.0, "Valor de saque deve ser maior que zero.", 0.0);
 		}catch (RuntimeException e) {
 			menssage = e.getMessage();
 		}
@@ -110,11 +110,11 @@ public class VerificadoraTest {
 	
 	@Test 
 	public void naoDeveRetornarExceptionQuandoSaqueForValido() {
-		ContaCorrente contaCorrente = new ContaCorrente("00465", "00001234", "Maiko Cunha");
-		contaCorrente.depositar(200.0);
 		String menssage = null;		
 		try {
-			Verificadora.valorMaiorQueZeroSaldoDisponivel(100.0, "Saldo insuficiente.");
+			ContaCorrente contaCorrente = new ContaCorrente("0123", "0114", "joao");
+			contaCorrente.depositar(200.0);
+			Verificadora.valorMaiorQueZeroSaldoDisponivel(100.0, "Saldo insuficiente.", contaCorrente.getSaldo());
 		}catch(RuntimeException e) {
 			menssage = e.getMessage();
 		}

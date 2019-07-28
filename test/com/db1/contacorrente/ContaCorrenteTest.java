@@ -153,7 +153,6 @@ public class ContaCorrenteTest {
 	@Test
 	public void deveRetornarExceptionQuandoSaqueForMaiorQueSaldo() {
 		ContaCorrente contaCorrente = new ContaCorrente("00465", "00001234", "Maiko Cunha");
-		contaCorrente.depositar(10.0);
 		String menssage = null;
 		try {
 			contaCorrente.sacar(100.0);
@@ -161,8 +160,8 @@ public class ContaCorrenteTest {
 			menssage = e.getMessage();
 		}
 		Assert.assertEquals("Valor de saque tem que ser maior que zero, e possuir saldo disponivel para saque.", menssage);
-		Assert.assertEquals(10.0, contaCorrente.getSaldo(), 0.0001);
-		Assert.assertEquals(1, contaCorrente.getHistorico().size());
+		Assert.assertEquals(0, contaCorrente.getSaldo(), 0.0001);
+		Assert.assertEquals(0, contaCorrente.getHistorico().size());
 	}
 	
 	@Test
@@ -172,5 +171,8 @@ public class ContaCorrenteTest {
 		contaCorrente.sacar(100.0);
 		
 		Assert.assertEquals(100.0, contaCorrente.getSaldo(), 0.0001);
+		Assert.assertEquals(2, contaCorrente.getHistorico().size());
+		Assert.assertEquals("Depositado: R$ 200.0", contaCorrente.getHistorico().get(0));
+		Assert.assertEquals("Valor retirado: R$ -100.0", contaCorrente.getHistorico().get(1));
 	}
 }
